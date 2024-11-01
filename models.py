@@ -23,7 +23,7 @@ class Pizza(db.Model):
     preco = db.Column(db.Float)
 
     def __init__(self, sabor, ingredientes, preco):
-        self.sabor = saborome
+        self.sabor = sabor
         self.ingredientes = ingredientes
         self.preco = preco
 
