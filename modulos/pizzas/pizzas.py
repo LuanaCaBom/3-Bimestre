@@ -7,7 +7,7 @@ bp_pizza = Blueprint('pizzas', __name__, template_folder="templates")
 @bp_pizza.route('/')
 def index():
     dados = Pizza.query.all()
-    return render_template('pizza.html', dados = dados)
+    return render_template('pizza.html', pizzas = dados)
     
 @bp_pizza.route('/add')
 def add():
@@ -21,7 +21,7 @@ def save():
     if sabor and ingredientes and preco:
         bd_pizza = Pizza(sabor, ingredientes, preco)
         db.session.add(bd_pizza)
-        db.session.commit
+        db.session.commit()
         flash('Pizza salva com sucesso!!!')
         return redirect('/pizzas')
     else:

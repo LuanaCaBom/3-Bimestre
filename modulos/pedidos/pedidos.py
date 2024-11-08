@@ -4,16 +4,16 @@ from database import db
 
 bp_pedido = Blueprint('pedidos', __name__, template_folder="templates")
 
-@bp_pedido.route('/pedidos')
+@bp_pedido.route('/')
 def index():
     dados = Pedido.query.all()
-    return render_template('pedido.html', dados = dados)
+    return render_template('pedido.html', pedidos = dados)
     
-@bp_pedido.route('/pedidos/add')
+@bp_pedido.route('/add')
 def add():
-    usuarios = Usuario.query.all()
-    pizzas = Pizza.query.all()
-    return render_template('pedido_add.html')
+    u = Usuario.query.all()
+    p = Pizza.query.all()
+    return render_template('pedido_add.html', usuarios = u, pizzas = p)
 
 @bp_pedido.route('/save', methods=['POST'])
 def save():
@@ -23,7 +23,7 @@ def save():
     if usuario_id and pizza_id and data:
         bd_pedido = Pedido(usuario_id, pizza_id, data)
         db.session.add(bd_pedido)
-        db.session.commit
+        db.session.commit()
         flash('Pedido salvo com sucesso!!!')
         return redirect('/pedidos')
     else:

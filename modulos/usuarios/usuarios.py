@@ -7,7 +7,7 @@ bp_usuario = Blueprint('usuarios', __name__, template_folder="templates")
 @bp_usuario.route('/')
 def index():
     dados = Usuario.query.all()
-    return render_template('usuario.html', dados = dados)
+    return render_template('usuario.html', usuarios = dados)
     
 @bp_usuario.route('/add')
 def add():
@@ -21,7 +21,7 @@ def save():
     if nome and email and senha:
         bd_usuario = Usuario(nome, email, senha)
         db.session.add(bd_usuario)
-        db.session.commit
+        db.session.commit()
         flash('Usuário salvo com sucesso!!!')
         return redirect('/usuarios')
     else:
